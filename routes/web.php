@@ -25,10 +25,10 @@ $router->post('/domains', function (Illuminate\Http\Request $request) use ($rout
     if ($validator->fails()) {
         return view('home', ['errors' => $validator->errors()->all()]);
     }
-
-    $domain = Domain::updateOrCreate(['name' => $request['url']]);
-    $id = $domain->id;
-    return redirect()->route('domain', ['id' => $id]);
+    $url = parse_url($request['url'], PHP_URL_HOST);
+    $domain = Domain::updateOrCreate(['name' => $url]);
+    $domain->touch();
+    return redirect()->route('domain', ['id' => $domain->id]);
 });
 
 $router->get('/domains/{id}', ['as' => 'domain', function ($id) use ($router) {
