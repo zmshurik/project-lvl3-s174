@@ -5,6 +5,7 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class AppTest extends TestCase
 {
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *
@@ -15,5 +16,13 @@ class AppTest extends TestCase
         $this->get('/');
 
         $this->assertResponseOk();
+    }
+
+    public function testDatabaseCreateRaw()
+    {
+        
+
+        $this->post('/domains', ['url' => 'http://domain.com']);
+        $this->seeInDatabase('domains', ['name' => 'http://domain.com']);
     }
 }
