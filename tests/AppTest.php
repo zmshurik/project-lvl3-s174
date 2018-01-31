@@ -18,6 +18,13 @@ class AppTest extends TestCase
         $this->assertResponseOk();
     }
 
+    public function testDomainsPage()
+    {
+        $this->get('/domains');
+
+        $this->assertResponseOk();
+    }
+
     public function testDatabaseCreateRaw()
     {
         $this->post('/domains', ['url' => 'http://domain.com']);
