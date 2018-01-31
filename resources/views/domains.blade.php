@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('home', '')
+@section('domains', 'active')
 
 @section('content')
 <table class='table'>
@@ -11,14 +11,16 @@
       <th scope="col">created</th>
       <th scope="col">updated</th>
     </tr>
-  </thead>
+  </thead>  
   <tbody>
+  @foreach ($domains as $domain)
     <tr>
       <th scope="row">{{ $domain->id }}</th>
       <td>{{ $domain->name }}</td>
       <td>{{ $domain->created_at }}</td>
       <td>{{ $domain->updated_at }}</td>
-    </tr>
+    </tr>    
+  @endforeach    
   </tbody>
 </table>  
 @endsection

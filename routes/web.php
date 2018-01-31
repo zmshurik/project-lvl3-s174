@@ -33,5 +33,10 @@ $router->post('/domains', function (Illuminate\Http\Request $request) use ($rout
 
 $router->get('/domains/{id}', ['as' => 'domain', function ($id) use ($router) {
     $domain = Domain::find($id);
-    return view('domains', ["domain" => $domain]);
+    return view('domains', ["domains" => [$domain]]);
 }]);
+
+$router->get('/domains', function () use ($router) {
+    $domains = Domain::all();
+    return view('domains', ["domains" => $domains]);
+});
