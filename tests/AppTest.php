@@ -20,8 +20,6 @@ class AppTest extends TestCase
 
     public function testDatabaseCreateRaw()
     {
-        
-
         $this->post('/domains', ['url' => 'http://domain.com']);
         $this->seeInDatabase('domains', ['name' => 'http://domain.com']);
     }
