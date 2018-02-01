@@ -22,5 +22,8 @@
     </tr>    
   @endforeach    
   </tbody>
-</table>  
+</table>
+@if(!is_array($domains))
+  {{ $domains->links() }}
+@endif
 @endsection

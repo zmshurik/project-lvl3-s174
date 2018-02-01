@@ -17,8 +17,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link @yield('home')" href="/">Home</a>
-      <a class="nav-item nav-link @yield('domains')" href="/domains">Domains</a>
+      <a class="nav-item nav-link @yield('home')" href={{ route('home')}}>Home</a>
+      <a class="nav-item nav-link @yield('domains')" href={{ route('domains.index') }}>Domains</a>
     </div>
   </div>
 </nav>
