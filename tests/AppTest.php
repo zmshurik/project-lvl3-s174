@@ -14,14 +14,14 @@ class AppTest extends TestCase
     public function testMainPage()
     {
         $this->get('/');
-
         $this->assertResponseOk();
     }
 
     public function testDomainsPage()
     {
+        DB::insert('insert into domains (name) values (?)', ['domain1']);
+        DB::insert('insert into domains (name) values (?)', ['domain2']);        
         $this->get('/domains');
-
         $this->assertResponseOk();
     }
 
