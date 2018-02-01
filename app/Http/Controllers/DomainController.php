@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use \App\Domain;
+use \App\Domains;
 
 class DomainController extends Controller
 {
@@ -18,13 +18,13 @@ class DomainController extends Controller
 
     public function index()
     {
-        $domains = Domain::all();
+        $domains = Domains::all();
         return view('domains', ["domains" => $domains]);
     }
 
     public function show($id)
     {
-        $domain = Domain::find($id);
+        $domain = Domains::find($id);
         return view('domains', ["domains" => [$domain]]);
     }
 
@@ -39,7 +39,7 @@ class DomainController extends Controller
             return view('home', ['errors' => $validator->errors()->all()]);
         }
         $url = parse_url($request['url'], PHP_URL_HOST);
-        $domain = Domain::updateOrCreate(['name' => $url]);
+        $domain = Domains::firstOrCreate(['name' => $url]);
         $domain->touch();
         return redirect()->route('domains.show', ['id' => $domain->id]);
     }
