@@ -29,6 +29,6 @@
   </tbody>
 </table>
 @if(!$isSingleRow)
- <p align="center">{{ $domains->links() }}</p>
+  {{ $domains->links('paginator.custom', ['paginator' => @domains]) }}
 @endif
 @endsection
