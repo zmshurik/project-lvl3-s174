@@ -19,13 +19,13 @@ class DomainController extends Controller
     public function index()
     {
         $domains = Domains::paginate(10);
-        return view('domains', ["domains" => $domains]);
+        return view('domains', ["domains" => $domains, 'isSingleRow' => false]);
     }
 
     public function show($id)
     {
         $domain = Domains::find($id);
-        return view('domains', ["domains" => [$domain]]);
+        return view('domains', ["domains" => [$domain], 'isSingleRow' => true]);
     }
 
     public function store(\Illuminate\Http\Request $request)

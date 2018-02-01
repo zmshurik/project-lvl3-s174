@@ -16,14 +16,19 @@
   @foreach ($domains as $domain)
     <tr>
       <th scope="row">{{ $domain->id }}</th>
-      <td>{{ $domain->name }}</td>
+      <td>@if($isSingleRow)
+            {{ $domain->name }}
+          @else
+          <a href={{ route('domains.show', ['id' => $domain->id]) }}>{{ $domain->name }}</a>
+          @endif
+      </td>
       <td>{{ $domain->created_at }}</td>
       <td>{{ $domain->updated_at }}</td>
     </tr>    
   @endforeach    
   </tbody>
 </table>
-@if(!is_array($domains))
-  {{ $domains->links() }}
+@if(!$isSingleRow)
+ <p align="center">{{ $domains->links() }}</p>
 @endif
 @endsection
