@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
-@section('domains', 'active')
+@if(!$isSingleRow)
+    @section('domains', 'active')
+@endif
+
 
 @section('content')
 <table class='table'>
@@ -11,7 +14,7 @@
       <th scope="col">created</th>
       <th scope="col">updated</th>
     </tr>
-  </thead>  
+  </thead>
   <tbody>
   @foreach ($domains as $domain)
     <tr>
@@ -24,11 +27,18 @@
       </td>
       <td>{{ $domain->created_at }}</td>
       <td>{{ $domain->updated_at }}</td>
-    </tr>    
-  @endforeach    
+    </tr>
+  @endforeach
   </tbody>
 </table>
 @if(!$isSingleRow)
   {{ $domains->links('paginator.custom', ['paginator' => @domains]) }}
+@else
+<div class="container">
+  <ul class="list-group text-center">
+    <li class="list-group-item">Code of response <b>{{ empty($domains[0]->response_code) ? 'NA' :  $domains[0]->response_code }}</b></li>
+    <li class="list-group-item">Content length <b>{{ empty($domains[0]->content_length) ? 'NA' :  $domains[0]->content_length}}</b></li>
+  </ul>
+</div>
 @endif
 @endsection
