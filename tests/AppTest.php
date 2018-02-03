@@ -33,19 +33,43 @@ class AppTest extends TestCase
 
     public function testDatabaseCreateRaw()
     {
+        $html = <<<DOC
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta <meta name="keywords" content="content of keywords">
+            <meta <meta name="content" content="my keywords">
+        </head>
+        <body>
+
+        <h1>Header</h1>
+
+        <p>My first paragraph.</p>
+
+        </body>
+        </html>
+DOC;
         $mock = new MockHandler([
-            new Response(200, ['Content-Length' => 4], 'body')
+            new Response(200, ['Content-Length' => 4], 'body'),
+            new Response(200, [], $html)
         ]);
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
         $this->app->instance(\GuzzleHttp\Client::class, $client);
-            
-        $this->post('/domains', ['url' => 'http://domain.com']);       
+
+        $this->post('/domains', ['url' => 'http://domain.com']);
         $this->seeInDatabase('domains', [
             'name' => 'domain.com',
             'page_body' => 'body',
             'content_length' => 4,
             'response_code' => 200
+        ]);
+        $this->post('/domains', ['url' => 'http://domain2.com']);
+        $this->seeInDatabase('domains', [
+            'name' => 'domain2.com',
+            'response_code' => 200,
+            'main_header' => 'Header',
+            'meta_keywords' => 'my keywords'
         ]);
     }
 }
