@@ -15,7 +15,7 @@ class DomainController extends Controller
      */
     public function __construct(Client $client)
     {
-        $this->$guzzleClient = $client;
+        $this->guzzleClient = $client;
     }
 
     public function index()
@@ -42,7 +42,7 @@ class DomainController extends Controller
 
         $url = $request['url'];
         try {
-            $response = $this->client->get($url);
+            $response = $this->guzzleClient->get($url);
         } catch (\Exception $e) {
             return view('home', ['errors' => ["Something was wrong within request to $url"]]);
         }
