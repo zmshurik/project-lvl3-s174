@@ -37,7 +37,7 @@ class AppTest extends TestCase
         <!DOCTYPE html>
         <html>
         <head>
-            <meta <meta name="keywords" content="my keywords">
+            <meta name="keywords" content="my keywords">
         </head>
         <body>
 
@@ -63,7 +63,7 @@ DOC;
             'content_length' => 4,
             'response_code' => 200
         ]);
-        $this->post('/domains', ['url' => 'http://domain2.com']);
+        $this->post('/domains', ['url' => 'http://domain2.com']);        
         $this->seeInDatabase('domains', [
             'name' => 'domain2.com',
             'response_code' => 200,
