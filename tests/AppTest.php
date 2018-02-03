@@ -37,8 +37,7 @@ class AppTest extends TestCase
         <!DOCTYPE html>
         <html>
         <head>
-            <meta <meta name="keywords" content="content of keywords">
-            <meta <meta name="content" content="my keywords">
+            <meta <meta name="keywords" content="my keywords">
         </head>
         <body>
 
